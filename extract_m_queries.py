@@ -1,8 +1,10 @@
+#!/usr/bin/env python3
 from zipfile import ZipFile
 import xml.etree.ElementTree as ET
 import base64
 import struct
 from io import BytesIO
+from sys import argv
 
 def extract_m_queries(filepath):
     '''Extracts M queries (Power Query) from a given xlsx file.
@@ -30,4 +32,6 @@ def extract_m_queries(filepath):
     # construct zipfile and return the contents of the file we're interested in
     package = ZipFile(BytesIO(package_parts_binary))
 
-    return package.read('Formulas/Section1.m')
+    package.extractall()
+
+extract_m_queries(argv[1])
